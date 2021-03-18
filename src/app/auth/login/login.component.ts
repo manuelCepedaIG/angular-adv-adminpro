@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit{
   }
     
   login() {
-    console.log(this.loginForm.value);
+    //console.log(this.loginForm.value);
     this.usuarioService.login(this.loginForm.value)
       .subscribe(res => {
         if(this.loginForm.get('remember').value){
@@ -52,16 +52,16 @@ export class LoginComponent implements OnInit{
 
   onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    //console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    //console.log('Name: ' + profile.getName());
+    //console.log('Image URL: ' + profile.getImageUrl());
+    //console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
   }
 
   signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-      console.log('User signed out.');
+      //console.log('User signed out.');
     });
   }
 
@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit{
     this.auth2.attachClickHandler(element, {},
         (googleUser) => {
           const id_token = googleUser.getAuthResponse().id_token;
-          console.log(id_token);
+          //console.log(id_token);
           this.usuarioService.loginGoogle(id_token).subscribe(res => {
             this.ngZone.run(()=> {
               this.router.navigateByUrl('/dashboard');
