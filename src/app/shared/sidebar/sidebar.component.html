@@ -3,13 +3,13 @@
 <!-- ============================================================== -->
 <aside class="left-sidebar">
     <!-- Sidebar scroll-->
-    <div class="scroll-sidebar">
+    <div class="scroll-sidebar animated fadeInLeft slow">
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="user-profile">
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img [src]="usuario.imagenUrl" alt="user" /><span class="hide-menu">{{usuario.nombre}} </span></a>
-                    <ul aria-expanded="false" class="collapse">
+                    <ul aria-expanded="false" class="collapse animated fadeInLeft fast">
                         <li><a routerLink="./perfil" routerLinkActive="active">My Profile </a></li>
                         <li><a href="javascript:void()">My Balance</a></li>
                         <li><a href="javascript:void()">Inbox</a></li>
@@ -19,7 +19,7 @@
                 </li>
                 <li class="nav-devider"></li>
                 <li class="nav-small-cap">PERSONAL</li>
-                <li *ngFor="let item of menuItems"> 
+                <li *ngFor="let item of sidebarService.menu"> 
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                         <i [class]="item.icono"></i>
                         <span class="hide-menu">
@@ -30,7 +30,7 @@
                         </span>
                     </a>
                     
-                    <ul aria-expanded="false" class="collapse">
+                    <ul aria-expanded="false" class="collapse animated fadeInLeft fast">
                         <li *ngFor="let subMenuItem of item.submenu">
                             <a [routerLink]="subMenuItem.url" 
                                 routerLinkActive="active"

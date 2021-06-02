@@ -70,4 +70,10 @@ export class BusquedasService {
                         })
                       );
   }
+
+  buscarGlobal( busqueda: string ) {
+    const url = `${base_url}/search/${busqueda}`;
+    return this.http.get<any[]>( url, this.headers );
+  }
+
 }

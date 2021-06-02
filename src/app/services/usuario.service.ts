@@ -46,6 +46,10 @@ export class UsuarioService {
     }
   }
 
+  get role(): 'ADMIN_ROLE' | 'USER_ROLE' {
+    return this.usuario.role;
+  }
+
   validarToken() {
     return this.http.get(`${base_url}/login/renew`, this.headers).pipe(
       map((res:any) => {
@@ -53,6 +57,7 @@ export class UsuarioService {
         this.usuario = new Usuario(nombre, email, '', img, google, role, uid)
         //console.log(this.usuario);
         localStorage.setItem('token', res.token);
+        localStorage.setItem('menu', JSON.stringify(res.menu));
         return true;
       }),
       catchError( err => { 
@@ -66,7 +71,8 @@ export class UsuarioService {
     return this.http.post(`${base_url}/usuarios`, formData,)
                       .pipe(
                         tap( (res:any) => {
-                          localStorage.setItem('token', res.token)
+                          localStorage.setItem('token', res.token);
+                          localStorage.setItem('menu', JSON.stringify(res.menu));
                         })
                       );
   }
@@ -83,7 +89,8 @@ export class UsuarioService {
     return this.http.post(`${base_url}/login`, formData)
                       .pipe(
                         tap( (res:any) => {
-                          localStorage.setItem('token', res.token)
+                          localStorage.setItem('token', res.token);
+                          localStorage.setItem('menu', JSON.stringify(res.menu));
                         })
                       );
   }
@@ -92,13 +99,16 @@ export class UsuarioService {
     return this.http.post(`${base_url}/login/google`, {token})
                       .pipe(
                         tap( (res:any) => {
-                          localStorage.setItem('token', res.token)
+                          localStorage.setItem('token', res.token);
+                          localStorage.setItem('menu', JSON.stringify(res.menu));
                         })
                       );
   }
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
+
     this.auth2.signOut().then(() => {
       this.ngZone.run(() => {
         this.router.navigateByUrl('/login');
